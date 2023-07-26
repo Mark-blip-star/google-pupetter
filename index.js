@@ -41,4 +41,4 @@ async function getEmailContent(email, password) {
   }
 }
 
-getEmailContent("furr.development@gmail.com", "ShNA2nTqLD");
+getEmailContent();
