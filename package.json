@@ -1,0 +1,15 @@
+{
+  "name": "google-pupetter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.36.2",
+    "puppeteer": "^20.9.0"
+  }
+}
