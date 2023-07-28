@@ -1,7 +1,7 @@
 FROM selenium/standalone-firefox:latest
 
 # Установка Node.js та npm
-RUN apt-get update && apt-get install -y nodejs npm
+RUN sudo apt-get update && sudo apt-get install -y nodejs npm
 
 # ... (other parts of your Dockerfile)
 
