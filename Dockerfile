@@ -1,18 +1,18 @@
-FROM selenium/standalone-firefox:latest
+# Використовуйте образ puppeteer с Firefox
+FROM buildkite/puppeteer:latest
 
 # Установка Node.js та npm
-RUN sudo apt-get update && sudo apt-get install -y nodejs npm
+RUN apt-get update && apt-get install -y nodejs npm
 
-# ... (other parts of your Dockerfile)
-
-USER root
-
+# Створення папки для додатку
 WORKDIR /usr/src/app
 
+# Копіюємо файл package.json та package-lock.json та встановлюємо залежності
 COPY package*.json ./
-RUN npm i
+RUN npm ci
+
+# Копіюємо всі файли з директорії проекту
 COPY . .
 
-# Залишайте решту Dockerfile без змін
-
+# Запуск додатку
 CMD [ "node", "index.js" ]
