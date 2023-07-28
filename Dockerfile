@@ -1,10 +1,5 @@
-FROM selenium/standalone-firefox:latest
-
-# Установка Node.js та npm
-RUN sudo apt-get update && sudo apt-get install -y nodejs npm
-
-# ... (other parts of your Dockerfile)
-RUN sudo npm i puppeteer
+# Use official Node.js image
+FROM node:14
 
 USER root
 
@@ -14,6 +9,7 @@ COPY package*.json ./
 RUN npm i
 COPY . .
 
-# Залишайте решту Dockerfile без змін
+# Set environment variable for Puppeteer
+ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/firefox"
 
 CMD [ "node", "index.js" ]
