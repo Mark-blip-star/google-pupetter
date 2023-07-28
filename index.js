@@ -6,6 +6,7 @@ function delay(ms) {
 
 async function getEmailContent(email, password) {
   try {
+    console.log("Script started");
     const browser = await firefox.launch({
       headless: false,
     });
@@ -41,4 +42,4 @@ async function getEmailContent(email, password) {
   }
 }
 
-getEmailContent();
+getEmailContent(process.env.EMAIL, process.env.PASSWORD);
