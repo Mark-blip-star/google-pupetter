@@ -25,6 +25,7 @@ async function getEmailContent(email, password) {
 
     const page = await browser.newPage();
     await page.goto("https://mail.google.com");
+    console.log("start");
     await delay(1000);
 
     await page.waitForSelector('input[type="email"]', { visible: true });
@@ -37,7 +38,7 @@ async function getEmailContent(email, password) {
     await page.type('input[type="password"]', password);
     await delay(1000);
     await page.keyboard.press("Enter");
-
+    console.log("end");
     await page.waitForNavigation({ waitUntil: "networkidle" });
     await page.waitForSelector(".bsU");
 
