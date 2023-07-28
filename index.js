@@ -1,4 +1,4 @@
-const { webkit } = require("playwright");
+const puppeteer = require("puppeteer");
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -6,30 +6,28 @@ function delay(ms) {
 
 async function getEmailContent(email, password) {
   try {
-    console.log("Script started");
-    const browser = await webkit.launch({});
+    const browser = await puppeteer.launch({ headless: false });
 
-    const context = await browser.newContext();
-    const page = await context.newPage();
+    const page = await browser.newPage();
     await page.goto("https://mail.google.com");
     await delay(1000);
 
     await page.waitForSelector('input[type="email"]', { visible: true });
     await delay(2000);
     await page.type('input[type="email"]', email);
-    await page.press('input[type="email"]', "Enter");
+    await page.keyboard.press("Enter");
 
     await page.waitForSelector('input[type="password"]', { visible: true });
     await delay(2000);
     await page.type('input[type="password"]', password);
     await delay(1000);
-    await page.press('input[type="password"]', "Enter");
+    await page.keyboard.press("Enter");
 
-    await page.waitForLoadState("networkidle");
+    await page.waitForNavigation({ waitUntil: "networkidle" });
     await page.waitForSelector(".bsU");
 
     const divElement = await page.waitForSelector(".bsU");
-    const content = await divElement.textContent();
+    const content = await divElement.evaluate((el) => el.textContent);
 
     console.log("Messages count:", content);
     await delay(1000);
@@ -40,4 +38,4 @@ async function getEmailContent(email, password) {
   }
 }
 
-getEmailContent(process.env.EMAIL, process.env.PASSWORD);
+getEmailContent("furr.development@gmail.com", "ShNA2nTqLD");
