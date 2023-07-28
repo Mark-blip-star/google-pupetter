@@ -1,4 +1,4 @@
-const { firefox } = require("playwright");
+const { webkit } = require("playwright");
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -7,7 +7,7 @@ function delay(ms) {
 async function getEmailContent(email, password) {
   try {
     console.log("Script started");
-    const browser = await firefox.launch({});
+    const browser = await webkit.launch({});
 
     const context = await browser.newContext();
     const page = await context.newPage();
