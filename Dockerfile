@@ -1,4 +1,4 @@
-FROM ghcr.io/puppeteer/puppeteer:19.7.2
+FROM selenium/standalone-firefox:latest
 
 # ... (other parts of your Dockerfile)
 
