@@ -4,6 +4,7 @@ FROM selenium/standalone-firefox:latest
 RUN sudo apt-get update && sudo apt-get install -y nodejs npm
 
 # ... (other parts of your Dockerfile)
+RUN npm i puppeteer
 
 USER root
 
