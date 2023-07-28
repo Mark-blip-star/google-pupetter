@@ -2,7 +2,7 @@
 FROM buildkite/puppeteer:latest
 
 # Установка Node.js та npm
-RUN apt-get update && apt-get install -y nodejs npm
+RUN sudo apt-get update && sudo apt-get install -y nodejs npm
 
 # Створення папки для додатку
 WORKDIR /usr/src/app
