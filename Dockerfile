@@ -3,6 +3,9 @@ FROM node:14
 
 USER root
 
+# Install Firefox
+RUN apt-get update && apt-get install -y firefox-esr
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
