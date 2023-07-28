@@ -30,13 +30,15 @@ async function getEmailContent(email, password) {
     await page.waitForSelector('input[type="email"]', { visible: true });
     await delay(2000);
     await page.type('input[type="email"]', email);
-    await page.keyboard.press("Enter");
+    //
 
+    await page.click("button");
+    //
     await page.waitForSelector('input[type="password"]', { visible: true });
     await delay(2000);
     await page.type('input[type="password"]', password);
     await delay(1000);
-    await page.keyboard.press("Enter");
+    await page.click("button");
 
     // await page.waitForNavigation({ waitUntil: "networkidle" });
     await page.waitForSelector(".bsU");
