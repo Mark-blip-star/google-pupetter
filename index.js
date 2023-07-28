@@ -1,8 +1,10 @@
 const express = require("express");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-extra");
+const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 
 const app = express();
 const port = 3000;
+puppeteer.use(StealthPlugin());
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -12,17 +14,16 @@ async function getEmailContent(email, password) {
   try {
     const browser = await puppeteer.launch({
       executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-      args: [
-        "--disable-setuid-sandbox",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote",
+      ignoreDefaultArgs: [
+        "--enable-automation",
+        "--disable-extensions",
+        "--disable-default-apps",
+        "--disable-component-extensions-with-background-pages",
       ],
     });
-
     const page = await browser.newPage();
+
     await page.goto("https://mail.google.com");
-    console.log("start");
     await delay(1000);
 
     await page.waitForSelector('input[type="email"]', { visible: true });
@@ -35,8 +36,8 @@ async function getEmailContent(email, password) {
     await page.type('input[type="password"]', password);
     await delay(1000);
     await page.keyboard.press("Enter");
-    console.log("end");
-    await page.waitForNavigation({ waitUntil: "networkidle" });
+
+    // await page.waitForNavigation({ waitUntil: "networkidle" });
     await page.waitForSelector(".bsU");
 
     const divElement = await page.waitForSelector(".bsU");
