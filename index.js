@@ -6,7 +6,10 @@ function delay(ms) {
 
 async function getEmailContent(email, password) {
   try {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({
+      headless: false,
+      userDataDir: "/opt/render/.cache/puppeteer",
+    });
 
     const page = await browser.newPage();
     await page.goto("https://mail.google.com");
