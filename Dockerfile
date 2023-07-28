@@ -3,7 +3,8 @@ FROM ghcr.io/puppeteer/puppeteer:19.7.2
 # ... (other parts of your Dockerfile)
 RUN apt-get update && apt-get install -y firefox
 
-USER root
+# Switch back to the non-root user provided by the base image
+USER pptruser
 
 WORKDIR /usr/src/app
 
